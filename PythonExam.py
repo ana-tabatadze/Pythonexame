@@ -7,7 +7,7 @@ class Book:
         self.year = year
 
     def __str__(self):
-        return f"Title: {self.title}, Author: {self.author}, Year: {self.year}"
+        return f"სათაური: {self.title}, ავტორი: {self.author}, წელი: {self.year}"
 
 class BookManager:
     def __init__(self, filename="books.json"):
@@ -29,11 +29,11 @@ class BookManager:
         try:
             year = int(year)
             if year <= 0:
-                raise ValueError("Year must be a positive integer")
+                raise ValueError("წელი უნდა იყოს დადებითი მთელი რიცხვი")
             self.books.append(Book(title, author, year))
-            print("Book added successfully!")
+            print("წიგნი წარმატებით დამატდა!")
         except ValueError as e:
-            print(f"Invalid year: {e}")
+            print(f"არასწორი წელი: {e}")
 
     def show_all_books(self):
         for book in self.books:
@@ -49,36 +49,36 @@ def main():
     book_manager = BookManager()
 
     while True:
-        print("\n1. Add a book")
-        print("2. Show all books")
-        print("3. Find a book")
-        print("4. Exit")
+        print("\n1. წიგნის დამატება")
+        print("2. ყველა წიგნის ჩვენება")
+        print("3. წიგნის ძებნა")
+        print("4. გასვლა")
 
-        choice = input("Enter your choice: ")
+        choice = input("ასარჩევად შეიყვანეთ რიცხვი: ")
 
         if choice == '1':
-            title = input("Enter book title: ")
-            author = input("Enter author: ")
-            year = input("Enter year of publication: ")
+            title = input("შეიყვანეთ წიგნის სათაური: ")
+            author = input("შეიყვანეთ ავტორი: ")
+            year = input("შეიყვანეთ გამოცემის წელი: ")
             book_manager.add_book(title, author, year)
 
         elif choice == '2':
             book_manager.show_all_books()
 
         elif choice == '3':
-            title = input("Enter book title to search: ")
+            title = input("შეიყვანეთ წიგნის სათაური ძებნისთვის: ")
             book = book_manager.find_book_by_title(title)
             if book:
                 print(book)
             else:
-                print("Book not found.")
+                print("წიგნი ვერ მოიძებნა.")
 
         elif choice == '4':
             book_manager.save_books()
             break
 
         else:
-            print("Invalid choice. Please try again.")
+            print("არასწორი რიცხვი. გთხოვთ სცადოთ ხელახლა.")
 
 if __name__ == "__main__":
     main()
